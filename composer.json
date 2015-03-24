@@ -22,5 +22,14 @@
   "require-dev": {
     "squizlabs/php_codesniffer": "2.*",
     "ecomdev/ecomdev_phpunit": "*"
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/EcomDev/EcomDev_PHPUnit"
+    }
+  ],
+  "extra": {
+    "magento-root-dir": "htdocs"
   }
 }
