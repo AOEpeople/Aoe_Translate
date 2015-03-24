@@ -46,4 +46,15 @@
             </aoe_translate>
         </dev>
     </default>
+
+    <phpunit>
+        <suite>
+            <modules>
+                <Aoe_Translate/>
+            </modules>
+            <groups>
+                <resources>Resource</resources>
+            </groups>
+        </suite>
+    </phpunit>
 </config>
