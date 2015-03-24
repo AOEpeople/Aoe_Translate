@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<config>
+    <modules>
+        <Aoe_Translate>
+            <active>true</active>
+            <codePool>community</codePool>
+            <depends>
+                <Mage_Core/>
+                <Mage_Adminhtml/>
+            </depends>
+        </Aoe_Translate>
+    </modules>
+</config>

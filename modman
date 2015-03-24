@@ -1,0 +1,3 @@
+app/etc/modules/Aoe_Translate.xml    app/etc/modules/Aoe_Translate.xml
+app/code/community/Aoe/Translate     app/code/community/Aoe/Translate
+shell/aoe_translate.php              shell/aoe_translate.php

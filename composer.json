@@ -1,0 +1,26 @@
+{
+  "name": "aoepeople/aoe_translate",
+  "description": "Magento Translation System Logging",
+  "license": "OSL-3.0",
+  "authors": [
+    {
+      "name": "David Robinson",
+      "email": "<first>.<last>@aoe.com",
+      "role": "Developer"
+    },
+    {
+      "name": "Lee Saferite",
+      "email": "<first>.<last>@aoe.com",
+      "role": "Developer"
+    }
+  ],
+  "type": "magento-module",
+  "require": {
+    "php": ">=5.3",
+    "magento-hackathon/magento-composer-installer": "*"
+  },
+  "require-dev": {
+    "squizlabs/php_codesniffer": "2.*",
+    "ecomdev/ecomdev_phpunit": "*"
+  }
+}
