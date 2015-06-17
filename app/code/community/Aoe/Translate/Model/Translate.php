@@ -12,6 +12,8 @@ class Aoe_Translate_Model_Translate extends Mage_Core_Model_Translate
      */
     protected function _getTranslatedString($text, $code)
     {
+        $text = (string)$text;
+
         $module = explode(self::SCOPE_SEPARATOR, $code, 2);
         $module = reset($module);
 
