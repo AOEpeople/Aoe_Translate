@@ -21,6 +21,15 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </log_level>
+                        <missed_pattern translate="label comment">
+                            <label>Missed patterns</label>
+                            <comment><![CDATA[Missed labels will be displayed with this pattern (where %s is replaced with the missed label)]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>110</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </missed_pattern>
                     </fields>
                 </aoe_translate>
             </groups>

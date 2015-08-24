@@ -2,6 +2,9 @@
 
 class Aoe_Translate_Model_Translate extends Mage_Core_Model_Translate
 {
+
+    const XML_PATH_MISSED_PATTERN = 'dev/aoe_translate/missed_pattern';
+
     /**
      * Return translated string from text.
      *
@@ -24,7 +27,11 @@ class Aoe_Translate_Model_Translate extends Mage_Core_Model_Translate
             $translated = $this->_data[$text];
             $status = Aoe_Translate_Helper_Data::STATUS_UNSCOPED;
         } else {
-            $translated = $text;
+            if ($pattern = Mage::getStoreConfig(self::XML_PATH_MISSED_PATTERN)) {
+                $translated = sprintf($pattern, $text);
+            } else {
+                $translated = $text;
+            }
             $status = Aoe_Translate_Helper_Data::STATUS_MISSED;
         }
 
