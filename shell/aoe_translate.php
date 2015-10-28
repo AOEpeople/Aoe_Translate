@@ -4,6 +4,12 @@ require_once 'abstract.php';
 
 class Aoe_Translate_Shell_Translate extends Mage_Shell_Abstract
 {
+    const EXPORT_TRANSLATION_FILE_NAME = 'aoe_translate.log';
+
+    /**
+     * @var array
+     */
+    protected $_exportFileHandles = [];
 
     public function generateStoreTranslationsAction()
     {
@@ -47,6 +53,37 @@ class Aoe_Translate_Shell_Translate extends Mage_Shell_Abstract
     public function generateStoreTranslationsActionHelp()
     {
         return ' [-storeIds <csl of store ids, defaults to all stores>]';
+    }
+
+    /**
+     * @return void
+     */
+    public function exportTranslationTableAction()
+    {
+        $resourceCollection = Mage::getResourceModel('aoe_translate/log_collection');
+        foreach ($resourceCollection as $item) {
+            $fileHandle = $this->_getExportHandleForLocale($item->getLocale());
+
+            $csvLineData = [
+                $item->getModule() . Mage_Core_Model_Translate::SCOPE_SEPARATOR . $item->getSource(),
+                $item->getTranslation()
+            ];
+
+            if (false === fputcsv($fileHandle, $csvLineData)) {
+                echo 'Error writing line to file' . PHP_EOL;
+                break;
+            }
+        }
+
+        $this->_closeAllExportFileHandles();
+    }
+
+    /**
+     * @return string
+     */
+    public function exportTranslationTableActionHelp()
+    {
+        return '';
     }
 
     /**
@@ -134,6 +171,37 @@ class Aoe_Translate_Shell_Translate extends Mage_Shell_Abstract
             $result = $temp;
         }
         return $result;
+    }
+
+    /**
+     * @param string $locale Locale
+     * @return mixed
+     */
+    protected function _getExportHandleForLocale($locale)
+    {
+        if (!isset($this->_exportFileHandles[$locale])) {
+            $fullPath = Mage::getBaseDir('export') . DS . $locale . '_' . self::EXPORT_TRANSLATION_FILE_NAME;
+
+            try {
+                $this->_exportFileHandles[$locale] = fopen($fullPath, 'w');
+            } catch (Exception $e) {
+                echo sprintf('Could not open file %s for writing!', $fullPath) . PHP_EOL;
+                $this->_closeAllExportFileHandles();
+                exit(1);
+            }
+        }
+
+        return $this->_exportFileHandles[$locale];
+    }
+
+    /**
+     * @return void
+     */
+    protected function _closeAllExportFileHandles()
+    {
+        foreach ($this->_exportFileHandles as $handle) {
+            fclose($handle);
+        }
     }
 }
 
