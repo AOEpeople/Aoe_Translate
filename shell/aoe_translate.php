@@ -50,6 +50,26 @@ class Aoe_Translate_Shell_Translate extends Mage_Shell_Abstract
     }
 
     /**
+     * @return void
+     */
+    public function truncateTranslationTableAction()
+    {
+        /** @var Mage_Core_Model_Resource $resource */
+        $resource = Mage::getSingleton('core/resource');
+        $connection = $resource->getConnection('core_write');
+
+        $connection->truncateTable($resource->getTableName('aoe_translate/log'));
+    }
+
+    /**
+     * @return string
+     */
+    public function truncateTranslationTableActionHelp()
+    {
+        return '';
+    }
+
+    /**
      * Run script
      */
     public function run()
