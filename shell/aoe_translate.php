@@ -61,12 +61,14 @@ class Aoe_Translate_Shell_Translate extends Mage_Shell_Abstract
     public function exportTranslationTableAction()
     {
         $resourceCollection = Mage::getResourceModel('aoe_translate/log_collection');
-        foreach ($resourceCollection as $item) {
-            $fileHandle = $this->_getExportHandleForLocale($item->getLocale());
+        $translateItems = $resourceCollection->getData();
+
+        foreach ($translateItems as $item) {
+            $fileHandle = $this->_getExportHandleForLocale($item['locale']);
 
             $csvLineData = [
-                $item->getModule() . Mage_Core_Model_Translate::SCOPE_SEPARATOR . $item->getSource(),
-                $item->getTranslation()
+                $item['module'] . Mage_Core_Model_Translate::SCOPE_SEPARATOR . $item['source'],
+                $item['translation']
             ];
 
             if (false === fputcsv($fileHandle, $csvLineData)) {
@@ -83,7 +85,7 @@ class Aoe_Translate_Shell_Translate extends Mage_Shell_Abstract
      */
     public function exportTranslationTableActionHelp()
     {
-        return '';
+        return ' - Exports translation table to Magento export directory';
     }
 
     /**
@@ -103,7 +105,7 @@ class Aoe_Translate_Shell_Translate extends Mage_Shell_Abstract
      */
     public function truncateTranslationTableActionHelp()
     {
-        return '';
+        return ' - Truncates translation table. You should know what you are doing!';
     }
 
     /**
