@@ -12,6 +12,11 @@
       "name": "Lee Saferite",
       "email": "lee.saferite@aoe.com",
       "role": "Developer"
+    },
+    {
+      "name": "Daniel Zohm",
+      "email": "daniel.zohm@aoe.com",
+      "role": "Developer"
     }
   ],
   "type": "magento-module",
